@@ -19,12 +19,13 @@ function DropdownCtrl($scope, $http, Data, pubsub) {
           $scope.data.mapping = response.data;
 
           for (i in response.data){
+              if(!i.startsWith(".")) {
+                $scope.indices.push(i);
+                $scope.types[i] = [];
+                for (j in response.data[i].mappings){
 
-              $scope.indices.push(i);
-              $scope.types[i] = [];
-              for (j in response.data[i].mappings){
-
-                  $scope.types[i].push(j);
+                    $scope.types[i].push(j);
+                }
               }
           }
 
